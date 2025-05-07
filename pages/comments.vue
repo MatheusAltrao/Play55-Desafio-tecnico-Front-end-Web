@@ -21,19 +21,18 @@ const userData = JSON.parse(window.localStorage.getItem("userData") || "{}");
 const selectedFilter = ref<"recent" | "oldest" | "own" | "notOwn">("recent");
 
 const filteredComments = computed(() => {
-  if (selectedFilter.value === "recent") {
-    return [...comments.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  switch (selectedFilter.value) {
+    case "recent":
+      return [...comments.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    case "oldest":
+      return [...comments.value].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    case "own":
+      return comments.value.filter((comment) => comment.ownComment);
+    case "notOwn":
+      return comments.value.filter((comment) => !comment.ownComment);
+    default:
+      return comments.value;
   }
-  if (selectedFilter.value === "oldest") {
-    return [...comments.value].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }
-  if (selectedFilter.value === "own") {
-    return comments.value.filter((comment) => comment.ownComment);
-  }
-  if (selectedFilter.value === "notOwn") {
-    return comments.value.filter((comment) => !comment.ownComment);
-  }
-  return comments.value;
 });
 
 onMounted(() => {
