@@ -1,21 +1,21 @@
 <script setup>
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog'
+    DialogTrigger
+} from '@/components/ui/dialog';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { toTypedSchema } from "@vee-validate/zod";
+import { Plus } from "lucide-vue-next";
+import { useForm } from "vee-validate";
 import { toast } from "vue-sonner";
 import { z } from "zod";
-import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import { Input } from "@/components/ui/input";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-vue-next";
+import { ref } from "vue";
 
 const anonymousName = ref(localStorage.getItem("anonymousName") || "Anônimo");
 const isDialogOpen = ref(false);

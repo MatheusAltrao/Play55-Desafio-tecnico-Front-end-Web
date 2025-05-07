@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { Reply, Trash, Pen, Check, X } from "lucide-vue-next";
-import Button from "../ui/button/Button.vue";
+import { Check, Pen, Trash, X } from "lucide-vue-next";
 import { defineProps } from "vue";
+import Button from "../ui/button/Button.vue";
 
 interface IMessage {
+  id: string;
   senderName: string;
   date: string;
   likes: number;
-  ownMessage: boolean;
-  actions?: {
-    edit?: boolean;
-    delete?: boolean;
-  };
+  content: string;
+  ownComment: boolean;
 }
 
 const props = defineProps({
@@ -66,7 +64,7 @@ const cancelEdit = () => {
   isEditing.value = false;
 };
 
-const handleKeyDown = (event) => {
+const handleKeyDown = (event: KeyboardEvent) => {
   if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault();
     saveEdit();
@@ -89,7 +87,7 @@ const handleKeyDown = (event) => {
       <textarea @keydown="handleKeyDown" placeholder="Edite o comentário" v-model="newComment"
         class="w-full border border-zinc-300 rounded-md p-2 resize-none text-sm" rows="3"></textarea>
       <div class="flex items-center justify-end gap-2 ">
-        <Button @click="saveEdit" size="sm" variant="success">
+        <Button @click="saveEdit" size="sm">
           <Check :size="16" /> Enviar
         </Button>
         <Button @click="cancelEdit" size="sm" variant="secondary">
