@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Check, Pen, Trash, X } from "lucide-vue-next";
 import { defineProps } from "vue";
+import { ref } from "vue";
 import Button from "../ui/button/Button.vue";
 
 interface IMessage {

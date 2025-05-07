@@ -1,12 +1,10 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, defineProps } from "vue";
 import { Send } from "lucide-vue-next";
-import { Textarea } from "~/components/ui/textarea";
 import { Checkbox } from "~/components/ui/checkbox";
 import Button from "../ui/button/Button.vue";
 import { v4 as uuid } from "uuid";
 import AnonymousMode from "./anonymousMode";
-import { defineProps } from "vue";
 
 const props = defineProps({
   anonymousName: {
@@ -56,8 +54,6 @@ const handleCheckboxChange = () => {
   isOwnComment.value = !isOwnComment.value;
   console.log(isOwnComment.value);
 };
-
-
 
 </script>
 
