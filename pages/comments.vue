@@ -22,10 +22,10 @@ const selectedFilter = ref<"recent" | "oldest" | "own">("recent");
 
 const filteredComments = computed(() => {
   if (selectedFilter.value === "recent") {
-    return [...comments.value].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return [...comments.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
   if (selectedFilter.value === "oldest") {
-    return [...comments.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    return [...comments.value].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
   if (selectedFilter.value === "own") {
     return comments.value.filter((comment) => comment.ownComment);
