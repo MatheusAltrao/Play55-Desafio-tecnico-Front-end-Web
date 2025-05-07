@@ -118,7 +118,7 @@ const handleEditComment = (id: string, newComment: string) => {
     </div>
 
     <div class="w-full p-2">
-      <FormSendComment :anonymousName="anonymousName" />
+      <FormSendComment :anonymousName="anonymousName" :comments="comments" />
     </div>
   </div>
 </template>

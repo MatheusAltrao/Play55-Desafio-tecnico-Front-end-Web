@@ -1,7 +1,7 @@
 export interface IMessage {
   id: string;
   senderName: string;
-  date: Date;
+  date: string;
   likes: number;
   content: string;
   ownComment: boolean;
