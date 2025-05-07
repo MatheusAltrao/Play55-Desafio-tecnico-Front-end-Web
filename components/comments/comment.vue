@@ -3,15 +3,9 @@ import { Check, Pen, Trash, X } from "lucide-vue-next";
 import { defineProps } from "vue";
 import { ref } from "vue";
 import Button from "../ui/button/Button.vue";
+import type { IMessage } from "~/@types/message";
 
-interface IMessage {
-  id: string;
-  senderName: string;
-  date: string;
-  likes: number;
-  content: string;
-  ownComment: boolean;
-}
+
 
 const props = defineProps({
   comment: {

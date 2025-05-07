@@ -1,5 +1,5 @@
 <script setup>
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 const auth = useFirebaseAuth();
 const router = useRouter();
