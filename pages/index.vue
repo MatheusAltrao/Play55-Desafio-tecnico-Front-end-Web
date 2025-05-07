@@ -17,11 +17,11 @@ function handleSignOut() {
   <Header />
   <div class="flex flex-col items-center justify-center gap-8 mt-12">
     <div class="text-center">
-      <h1 class="text-3xl font-semibold">Bem-vindo ao Comments</h1>
-      <p class="text-muted-foreground">Comente, responda seus amigos e curta as interações</p>
+      <h1 class="lg:text-3xl text-lg font-semibold">Bem-vindo ao Comments</h1>
+      <p class="text-muted-foreground text-sm lg:text-base">Comente, responda seus amigos e curta as interações</p>
     </div>
 
-    <div class="lg:flex  hidden items-center gap-1">
+    <div class="flex flex-col sm:flex-row lg:hidden items-center gap-1">
       <div class="w-max">
         <HeaderTalkWithUsButton />
       </div>
