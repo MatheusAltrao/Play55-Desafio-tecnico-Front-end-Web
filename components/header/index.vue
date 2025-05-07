@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { signOut } from "firebase/auth";
 import { User, Menu } from "lucide-vue-next";
 import {
@@ -13,7 +13,9 @@ import {
 const auth = useFirebaseAuth();
 const user = useCurrentUser();
 function handleSignOut() {
-  signOut(auth);
+  if (auth) {
+    signOut(auth);
+  }
 }
 </script>
 
@@ -36,7 +38,7 @@ function handleSignOut() {
           <div class="flex items-center flex-col gap-1 p-4">
             <HeaderTalkWithUsButton />
             <Button class="w-full" variant="outline" @click="handleSignOut">
-              <User :size="20" /> {{ user.displayName }}
+              <User :size="20" /> {{ user?.displayName }}
             </Button>
           </div>
         </SheetContent>
@@ -47,7 +49,7 @@ function handleSignOut() {
           <HeaderTalkWithUsButton />
         </div>
         <Button variant="outline" @click="handleSignOut">
-          <User :size="20" /> {{ user.displayName }}
+          <User :size="20" /> {{ user?.displayName }}
         </Button>
       </div>
     </div>
