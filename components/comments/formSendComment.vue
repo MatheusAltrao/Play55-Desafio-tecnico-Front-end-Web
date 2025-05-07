@@ -21,12 +21,12 @@ const props = defineProps({
 
 const emit = defineEmits(["update-comments"]);
 
-const comment = ref("");
+const commentText = ref("");
 const isOwnComment = ref(true);
 const userData = JSON.parse(window.localStorage.getItem("userData") || "{}");
 
 const handleSendComment = () => {
-  if (!comment.value) return;
+  if (!commentText.value) return;
 
   const newComment: IMessage = {
     id: uuid(),
@@ -34,13 +34,13 @@ const handleSendComment = () => {
     date: new Date().toISOString(),
     likes: 0,
     ownComment: isOwnComment.value,
-    content: comment.value,
+    content: commentText.value,
   };
 
 
   emit("update-comments", newComment);
 
-  comment.value = "";
+  commentText.value = "";
   window.dispatchEvent(new Event("comment-added"));
 };
 
@@ -61,7 +61,7 @@ const handleCheckboxChange = () => {
     <div class="flex items-start justify-between gap-2 w-full">
       <div class="w-full space-y-1">
         <div class="w-full flex items-end flex-col gap-1 border shadow-sm rounded-md p-2">
-          <textarea placeholder="Escreva o seu comentário" v-model="comment" @keydown="handleKeyDown"
+          <textarea placeholder="Escreva o seu comentário" v-model="commentText" @keydown="handleKeyDown"
             class="w-full h-[100px] resize-none border-0 outline-0 text-sm" />
           <div>
             <Button @click="handleSendComment" size="sm">

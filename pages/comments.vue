@@ -73,6 +73,11 @@ const handleEditComment = (id: string, newComment: string) => {
     localStorage.setItem("comments", JSON.stringify(comments.value));
   }
 };
+
+const handleUpdateComments = (newComment: IMessage) => {
+  comments.value.push(newComment);
+  localStorage.setItem("comments", JSON.stringify(comments.value));
+};
 </script>
 
 <template>
@@ -118,7 +123,7 @@ const handleEditComment = (id: string, newComment: string) => {
     </div>
 
     <div class="w-full p-2">
-      <FormSendComment :anonymousName="anonymousName" :comments="comments" />
+      <FormSendComment :anonymousName="anonymousName" :comments="comments" @update-comments="handleUpdateComments" />
     </div>
   </div>
 </template>
