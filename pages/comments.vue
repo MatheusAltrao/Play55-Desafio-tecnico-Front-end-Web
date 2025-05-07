@@ -18,7 +18,7 @@ const router = useRouter();
 const comments = ref<IMessage[]>([]);
 const anonymousName = ref('');
 const userData = JSON.parse(window.localStorage.getItem("userData") || "{}");
-const selectedFilter = ref<"recent" | "oldest" | "own">("recent");
+const selectedFilter = ref<"recent" | "oldest" | "own" | "notOwn">("recent");
 
 const filteredComments = computed(() => {
   if (selectedFilter.value === "recent") {
@@ -29,6 +29,9 @@ const filteredComments = computed(() => {
   }
   if (selectedFilter.value === "own") {
     return comments.value.filter((comment) => comment.ownComment);
+  }
+  if (selectedFilter.value === "notOwn") {
+    return comments.value.filter((comment) => !comment.ownComment);
   }
   return comments.value;
 });
@@ -93,6 +96,9 @@ const handleEditComment = (id: string, newComment: string) => {
             </SelectItem>
             <SelectItem value="own">
               Minhas Mensagens
+            </SelectItem>
+            <SelectItem value="notOwn">
+              Mensagens de Outros
             </SelectItem>
           </SelectGroup>
         </SelectContent>
