@@ -1,11 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 const auth = useFirebaseAuth();
 const router = useRouter();
 
 function signInWithGoogle() {
-  signInWithPopup(auth, new GoogleAuthProvider()).then(() => router.replace("/"));
+  if (auth) {
+    signInWithPopup(auth, new GoogleAuthProvider()).then(() => router.replace("/"));
+  }
 }
 </script>
 
