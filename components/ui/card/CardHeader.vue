@@ -2,6 +2,7 @@
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 import { defineProps } from 'vue'
+
 const props = defineProps<{
   class?: HTMLAttributes['class']
 }>()
