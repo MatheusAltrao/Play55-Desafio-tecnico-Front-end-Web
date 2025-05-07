@@ -21,9 +21,11 @@ const props = defineProps({
 
 const emit = defineEmits(["update-comments"]);
 
-const commentText = ref("");
+const commentText = ref<string>("");
 const isOwnComment = ref(true);
 const userData = JSON.parse(window.localStorage.getItem("userData") || "{}");
+
+const disabledButton = computed(() => commentText.value.length === 0);
 
 const handleSendComment = () => {
   if (!commentText.value) return;
@@ -64,7 +66,7 @@ const handleCheckboxChange = () => {
           <textarea placeholder="Escreva o seu comentário" v-model="commentText" @keydown="handleKeyDown"
             class="w-full h-[100px] resize-none border-0 outline-0 text-sm" />
           <div>
-            <Button @click="handleSendComment" size="sm">
+            <Button :disabled="disabledButton" @click="handleSendComment" size="sm">
               <Send :size="16" /> Enviar
             </Button>
           </div>
