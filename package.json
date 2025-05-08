@@ -31,15 +31,8 @@
     "zod": "^3.24.4"
   },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.32.0",
-    "@typescript-eslint/parser": "^8.32.0",
-    "eslint": "^9.26.0",
-    "eslint-plugin-vue": "^10.1.0",
     "globals": "^16.1.0",
-    "prettier": "^3.5.3",
-    "typescript-eslint": "^8.32.0"
+    "prettier": "^3.5.3"
   },
   "name": "nuxt-app",
   "private": true,
