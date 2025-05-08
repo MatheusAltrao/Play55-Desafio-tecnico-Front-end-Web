@@ -11,6 +11,20 @@ import { useForm } from "vee-validate";
 import { computed, ref, watch } from "vue";
 import { toast } from "vue-sonner";
 import { z } from "zod";
+const { NUXT_PUBLIC_RECAPTCHA_KEY } = useRuntimeConfig().public
+
+const recaptchaKey = NUXT_PUBLIC_RECAPTCHA_KEY
+const endpointUrl = "<>"; // substitua pelo domínio real
+
+useHead({
+  script: [
+    {
+      src: `https://www.google.com/recaptcha/api.js?render=${recaptchaKey}`,
+      async: true,
+      defer: true,
+    },
+  ],
+});
 
 const formSchema = toTypedSchema(
   z.object({
@@ -53,11 +67,46 @@ watch(isDialogOpen, (open) => {
   }
 });
 
-const onSubmit = handleSubmit((values) => {
-  localStorage.setItem("userData", JSON.stringify(values));
-  isDialogOpen.value = false;
-  toast.success("Perfil Criado com sucesso");
-  router.push("/comments");
+const onSubmit = handleSubmit(async (values) => {
+  if (typeof window !== "undefined" && window.grecaptcha) {
+    window.grecaptcha.ready(() => {
+      window.grecaptcha
+        .execute(recaptchaKey, { action: "form_submit" })
+        .then(async (token: string) => {
+          console.log('token', token)
+          try {
+            const response = await fetch(endpointUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                ...values,
+                token,
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error("Erro na requisição");
+            }
+
+            localStorage.setItem("userData", JSON.stringify(values));
+            isDialogOpen.value = false;
+            toast.success("Perfil Criado com sucesso");
+            router.push("/comments");
+          } catch (err) {
+            console.error(err);
+            toast.error("Erro ao enviar formulário");
+          }
+        })
+        .catch((err: string) => {
+          console.error("Erro ao executar reCAPTCHA:", err);
+          toast.error("Erro ao executar reCAPTCHA");
+        });
+    });
+  } else {
+    toast.error("reCAPTCHA não carregado");
+  }
 });
 
 const value = computed({

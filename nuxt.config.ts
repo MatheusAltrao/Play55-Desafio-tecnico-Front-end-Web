@@ -4,6 +4,11 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
+  runtimeConfig:{
+    public: {
+      NUXT_PUBLIC_RECAPTCHA_KEY: '6LfTVC8rAAAAAISI8s59lF0JcXMq_XfgsHsepO5U'
+    },
+  },
   components: true,
   imports: {
     autoImport: true,
@@ -11,7 +16,8 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   ssr: false,
-  modules: ["nuxt-vuefire", "shadcn-nuxt", "nuxt-lucide-icons"],
+  modules: ["nuxt-vuefire", "shadcn-nuxt", "nuxt-lucide-icons",  ],
+
   shadcn: {
     /**
      * Prefix for all the imported component
