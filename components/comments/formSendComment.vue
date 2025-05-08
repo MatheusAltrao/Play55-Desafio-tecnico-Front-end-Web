@@ -74,8 +74,8 @@ const handleCheckboxChange = () => {
         </div>
         <div>
           <div class="flex items-center gap-1">
-            <Checkbox @click="handleCheckboxChange" v-model="isOwnComment" />
-            <span class="text-sm">Mensagem própria</span>
+            <Checkbox id="ownCommentCheckbox" @click="handleCheckboxChange" v-model="isOwnComment" />
+            <label for="ownCommentCheckbox" class="text-sm cursor-pointer select-none">Mensagem própria</label>
           </div>
           <div class="text-xs font-medium text-muted-foreground">
             <p>Se você desmarcar essa opção você estará no modo
