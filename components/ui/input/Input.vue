@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 import { useVModel } from '@vueuse/core'
-
+import { defineEmits } from "vue";
 import { defineProps } from 'vue'
 
 const props = defineProps<{

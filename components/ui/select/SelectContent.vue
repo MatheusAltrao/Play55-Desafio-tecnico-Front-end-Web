@@ -11,6 +11,7 @@ import {
 import { computed, type HTMLAttributes } from 'vue'
 import { SelectScrollDownButton, SelectScrollUpButton } from '.'
 import { defineProps } from 'vue'
+import { defineEmits } from "vue";
 
 defineOptions({
   inheritAttrs: false,

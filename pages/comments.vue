@@ -35,30 +35,30 @@ const filteredComments = computed(() => {
   }
 });
 
+const loadComments = () => {
+  comments.value = JSON.parse(localStorage.getItem("comments") || "[]");
+};
+
+const updateAnonymousName = () => {
+  anonymousName.value = localStorage.getItem("anonymousName") || "Anônimo";
+};
+
 onMounted(() => {
   if (!userData || Object.keys(userData).length === 0) {
     router.push("/");
     return;
   }
 
-  comments.value = JSON.parse(localStorage.getItem("comments") || "[]");
-  anonymousName.value = localStorage.getItem("anonymousName") || "Anônimo";
+  loadComments();
+  updateAnonymousName();
 
-  window.addEventListener("comment-added", () => {
-    comments.value = JSON.parse(localStorage.getItem("comments") || "[]");
-  });
-  window.addEventListener("anonymous-name-updated", () => {
-    anonymousName.value = localStorage.getItem("anonymousName") || "Anônimo";
-  });
+  window.addEventListener("comment-added", loadComments);
+  window.addEventListener("anonymous-name-updated", updateAnonymousName);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("comment-added", () => {
-    comments.value = JSON.parse(localStorage.getItem("comments") || "[]");
-  });
-  window.removeEventListener("anonymous-name-updated", () => {
-    anonymousName.value = localStorage.getItem("anonymousName") || "Anônimo";
-  });
+  window.removeEventListener("comment-added", loadComments);
+  window.removeEventListener("anonymous-name-updated", updateAnonymousName);
 });
 
 const handleDeleteComment = (id: string) => {

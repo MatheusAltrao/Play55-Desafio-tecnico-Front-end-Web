@@ -12,6 +12,7 @@ import {
 import { computed, type HTMLAttributes } from 'vue'
 import DialogOverlay from './DialogOverlay.vue'
 import { defineProps } from 'vue'
+import { defineEmits } from "vue";
 
 const props = defineProps<DialogContentProps & { class?: HTMLAttributes['class'] }>()
 const emits = defineEmits<DialogContentEmits>()

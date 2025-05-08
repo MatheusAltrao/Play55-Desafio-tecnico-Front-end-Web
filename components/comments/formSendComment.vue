@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, defineProps, defineEmits } from "vue";
+
 import { Send } from "lucide-vue-next";
 import { Checkbox } from "~/components/ui/checkbox";
 import Button from "../ui/button/Button.vue";

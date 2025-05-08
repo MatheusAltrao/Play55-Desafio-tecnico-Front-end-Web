@@ -2,6 +2,7 @@
 import type { SelectRootEmits, SelectRootProps } from 'reka-ui'
 import { SelectRoot, useForwardPropsEmits } from 'reka-ui'
 import { defineProps } from 'vue'
+import { defineEmits } from "vue";
 
 const props = defineProps<SelectRootProps>()
 const emits = defineEmits<SelectRootEmits>()

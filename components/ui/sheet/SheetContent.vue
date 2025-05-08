@@ -13,6 +13,8 @@ import {
 } from 'reka-ui'
 import SheetOverlay from './SheetOverlay.vue'
 import { defineProps } from 'vue'
+import { defineEmits } from "vue";
+
 interface SheetContentProps extends DialogContentProps {
   class?: HTMLAttributes['class']
   side?: 'top' | 'right' | 'bottom' | 'left'
