@@ -15,7 +15,7 @@ import { Plus } from "lucide-vue-next";
 import { useForm } from "vee-validate";
 import { toast } from "vue-sonner";
 import { z } from "zod";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const anonymousName = ref(localStorage.getItem("anonymousName") || "Anônimo");
 const isDialogOpen = ref(false);
@@ -30,34 +30,36 @@ const formSchema = toTypedSchema(
     })
 );
 
-const { handleSubmit } = useForm({
+const { handleSubmit, resetForm } = useForm({
     validationSchema: formSchema,
     initialValues: {
         name: anonymousName.value,
     },
 });
 
-
 const onSubmit = handleSubmit((values) => {
     localStorage.setItem("anonymousName", values.name);
     toast.success("Nome no modo anônimo atualizado com sucesso");
     window.dispatchEvent(new Event("anonymous-name-updated"));
-    isDialogOpen.value = false
+    isDialogOpen.value = false;
 });
 
-watch(isDialogOpen, (open) => {
-    if (open) {
-        const data = JSON.parse(localStorage.getItem("userData") || "{}");
-        anonymousName.value = data.anonymousName || "Anônimo";
+// Observa quando o diálogo é aberto e redefine o formulário
+watch(isDialogOpen, (isOpen) => {
+    if (isOpen) {
+        resetForm({
+            values: {
+                name: localStorage.getItem("anonymousName") || "Anônimo",
+            },
+        });
     }
 });
-
 </script>
+
 <template>
     <Dialog v-model:open="isDialogOpen">
         <DialogTrigger asChild>
-            <button class=" text-blue-600 underline">ver mais sobre o modo
-                anônimo</button>
+            <button class="text-blue-600 underline">ver mais sobre o modo anônimo</button>
         </DialogTrigger>
         <DialogContent>
             <DialogHeader>
@@ -67,8 +69,7 @@ watch(isDialogOpen, (open) => {
                 </DialogDescription>
             </DialogHeader>
 
-
-            <form @submit="(onSubmit)" class="space-y-4">
+            <form @submit="onSubmit" class="space-y-4">
                 <FormField v-slot="{ componentField }" name="name">
                     <FormItem>
                         <FormLabel>Nome</FormLabel>
@@ -82,7 +83,6 @@ watch(isDialogOpen, (open) => {
                     <Plus /> Adicionar
                 </Button>
             </form>
-
         </DialogContent>
     </Dialog>
 </template>
