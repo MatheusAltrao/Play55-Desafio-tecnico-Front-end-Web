@@ -45,6 +45,13 @@ const onSubmit = handleSubmit((values) => {
     isDialogOpen.value = false
 });
 
+watch(isDialogOpen, (open) => {
+    if (open) {
+        const data = JSON.parse(localStorage.getItem("userData") || "{}");
+        anonymousName.value = data.anonymousName || "Anônimo";
+    }
+});
+
 </script>
 <template>
     <Dialog v-model:open="isDialogOpen">
