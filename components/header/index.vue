@@ -17,6 +17,13 @@ function handleSignOut() {
     signOut(auth);
   }
 }
+
+console.log({
+  uid: user.value?.uid,
+  displayName: user.value?.displayName,
+  email: user.value?.email,
+  providerId: user.value?.providerId,
+});
 </script>
 
 <template>
